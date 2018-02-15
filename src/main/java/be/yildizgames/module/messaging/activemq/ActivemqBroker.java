@@ -26,12 +26,10 @@
 package be.yildizgames.module.messaging.activemq;
 
 import be.yildizgames.common.exception.technical.InitializationException;
-import be.yildizgames.common.logging.LogFactory;
 import be.yildizgames.module.messaging.Broker;
 import be.yildizgames.module.messaging.BrokerProperties;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
-import org.slf4j.Logger;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -40,8 +38,6 @@ import java.nio.file.Path;
  * @author Grégory Van den Borre
  */
 public class ActivemqBroker extends Broker {
-
-    private final Logger logger = LogFactory.getInstance().getLogger(this.getClass());
 
     private final BrokerService brokerService = new BrokerService();
 
@@ -56,9 +52,7 @@ public class ActivemqBroker extends Broker {
     public static ActivemqBroker initialize(String host, int port) {
         try {
             ActivemqBroker broker = new ActivemqBroker();
-            broker.logger.info("Preparing the broker...");
             String address = "failover:tcp://" + host + ":" + port;
-            broker.logger.info("Connecting to broker: {}", address);
             ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address);
             broker.initializeConnection(connectionFactory.createConnection());
             broker.start();
