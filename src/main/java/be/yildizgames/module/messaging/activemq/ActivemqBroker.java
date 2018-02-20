@@ -25,10 +25,11 @@
 
 package be.yildizgames.module.messaging.activemq;
 
+
 import be.yildizgames.common.exception.technical.InitializationException;
 import be.yildizgames.module.messaging.Broker;
 import be.yildizgames.module.messaging.BrokerProperties;
-import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.activemq.broker.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 
 import java.io.File;
