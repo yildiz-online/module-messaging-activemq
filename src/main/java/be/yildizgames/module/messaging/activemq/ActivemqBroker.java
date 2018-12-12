@@ -29,6 +29,7 @@ package be.yildizgames.module.messaging.activemq;
 import be.yildizgames.common.exception.initialization.InitializationException;
 import be.yildizgames.module.messaging.Broker;
 import be.yildizgames.module.messaging.BrokerProperties;
+import be.yildizgames.module.messaging.exception.MessagingException;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 
@@ -59,7 +60,7 @@ public class ActivemqBroker extends Broker {
             broker.start();
             return broker;
         } catch (Exception e) {
-            throw new InitializationException(e);
+            throw new MessagingException(e);
         }
     }
 
@@ -84,7 +85,7 @@ public class ActivemqBroker extends Broker {
             broker.start();
             return broker;
         } catch (Exception e) {
-            throw new InitializationException(e);
+            throw new MessagingException(e);
         }
     }
 
