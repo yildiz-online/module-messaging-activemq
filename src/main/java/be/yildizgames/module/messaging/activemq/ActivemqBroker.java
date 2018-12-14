@@ -26,7 +26,6 @@
 package be.yildizgames.module.messaging.activemq;
 
 
-import be.yildizgames.common.exception.initialization.InitializationException;
 import be.yildizgames.module.messaging.Broker;
 import be.yildizgames.module.messaging.BrokerProperties;
 import be.yildizgames.module.messaging.exception.MessagingException;
