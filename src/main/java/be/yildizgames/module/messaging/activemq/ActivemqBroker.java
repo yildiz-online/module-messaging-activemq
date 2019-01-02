@@ -32,8 +32,8 @@ import be.yildizgames.module.messaging.exception.MessagingException;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 
-import java.io.File;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * @author Grégory Van den Borre
@@ -46,11 +46,14 @@ public class ActivemqBroker extends Broker {
         super();
     }
 
-    public static ActivemqBroker initialize(BrokerProperties properties) {
+    static ActivemqBroker initialize(BrokerProperties properties) {
+        if(properties.getBrokerInternal()) {
+            return ActivemqBroker.initializeInternal("Default_broker", properties);
+        }
         return ActivemqBroker.initialize(properties.getBrokerHost(), properties.getBrokerPort());
     }
 
-    public static ActivemqBroker initialize(String host, int port) {
+    static ActivemqBroker initialize(String host, int port) {
         try {
             ActivemqBroker broker = new ActivemqBroker();
             String address = "failover:tcp://" + host + ":" + port;
@@ -63,19 +66,15 @@ public class ActivemqBroker extends Broker {
         }
     }
 
-    public static ActivemqBroker initializeInternal(String name, BrokerProperties properties) {
-        return ActivemqBroker.initializeInternal(name, new File(properties.getBrokerDataFolder()), properties.getBrokerHost(), properties.getBrokerPort());
+    static ActivemqBroker initializeInternal(String name, BrokerProperties properties) {
+        return ActivemqBroker.initializeInternal(name, Paths.get(properties.getBrokerDataFolder()), properties.getBrokerHost(), properties.getBrokerPort());
     }
 
-    public static ActivemqBroker initializeInternal(String name, Path dataDirectory, String host, int port) {
-        return ActivemqBroker.initializeInternal(name, dataDirectory.toFile(), host, port);
-    }
-
-    public static ActivemqBroker initializeInternal(String name, File dataDirectory, String host, int port) {
+    private static ActivemqBroker initializeInternal(String name, Path dataDirectory, String host, int port) {
         try {
             ActivemqBroker broker = new ActivemqBroker();
             broker.brokerService.setBrokerName(name);
-            broker.brokerService.setDataDirectoryFile(dataDirectory);
+            broker.brokerService.setDataDirectoryFile(dataDirectory.toFile());
             String address = "tcp://" + host + ":" + port;
             broker.brokerService.addConnector(address);
             broker.brokerService.start();

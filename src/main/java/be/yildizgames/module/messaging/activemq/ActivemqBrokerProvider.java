@@ -29,23 +29,23 @@ import be.yildizgames.module.messaging.BrokerProperties;
 import be.yildizgames.module.messaging.BrokerProvider;
 
 /**
+ * Provide the ActiveMQ implementation for the broker.
  * @author Grégory Van den Borre
  */
 public class ActivemqBrokerProvider implements BrokerProvider {
 
-    public final Broker initialize(BrokerProperties properties) {
+    @Override
+    public final Broker initialize(final BrokerProperties properties) {
         return ActivemqBroker.initialize(properties);
     }
 
-    public final Broker initialize(String host, int port) {
+    @Override
+    public final Broker initialize(final String host, final int port) {
         return ActivemqBroker.initialize(host, port);
     }
 
-    public final Broker initializeInternal(String name, BrokerProperties properties) {
+    @Override
+    public final Broker initializeInternal(final String name, final BrokerProperties properties) {
         return ActivemqBroker.initializeInternal(name, properties);
     }
-
-
-
-
 }
