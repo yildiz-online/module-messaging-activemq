@@ -32,6 +32,7 @@ import be.yildizgames.module.messaging.exception.MessagingException;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 
+import javax.jms.JMSException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -88,8 +89,12 @@ public class ActivemqBroker extends Broker {
     }
 
     @Override
-    public void close() throws Exception {
-        this.closeConnection();
-        this.brokerService.stop();
+    public void close() throws MessagingException {
+        try {
+            this.closeConnection();
+            this.brokerService.stop();
+        } catch (Exception e) {
+            throw new MessagingException(e);
+        }
     }
 }
