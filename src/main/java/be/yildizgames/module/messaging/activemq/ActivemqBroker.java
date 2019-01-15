@@ -32,11 +32,11 @@ import be.yildizgames.module.messaging.exception.MessagingException;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 
-import javax.jms.JMSException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
+ * Activemq implementation for the broker.
  * @author Grégory Van den Borre
  */
 public class ActivemqBroker extends Broker {
