@@ -27,13 +27,16 @@ package be.yildizgames.module.messaging.activemq;
 
 
 import be.yildizgames.module.messaging.Broker;
+import be.yildizgames.module.messaging.BrokerAddress;
 import be.yildizgames.module.messaging.BrokerProperties;
 import be.yildizgames.module.messaging.exception.MessagingException;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.broker.BrokerService;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Activemq implementation for the broker.
@@ -57,8 +60,8 @@ public class ActivemqBroker extends Broker {
     static ActivemqBroker initialize(String host, int port) {
         try {
             ActivemqBroker broker = new ActivemqBroker();
-            String address = "failover:tcp://" + host + ":" + port;
-            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address);
+            BrokerAddress address = BrokerAddress.failover(List.of(BrokerAddress.tcp(host, port)));
+            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address.getUri());
             broker.initializeConnection(connectionFactory.createConnection());
             broker.start();
             return broker;
@@ -68,18 +71,21 @@ public class ActivemqBroker extends Broker {
     }
 
     static ActivemqBroker initializeInternal(String name, BrokerProperties properties) {
-        return ActivemqBroker.initializeInternal(name, Paths.get(properties.getBrokerDataFolder()), properties.getBrokerHost(), properties.getBrokerPort());
+        return ActivemqBroker.initializeInternal(name, Paths.get(properties.getBrokerDataFolder()), properties.getBrokerHost());
     }
 
-    private static ActivemqBroker initializeInternal(String name, Path dataDirectory, String host, int port) {
+    private static ActivemqBroker initializeInternal(String name, Path dataDirectory, String host) {
         try {
             ActivemqBroker broker = new ActivemqBroker();
             broker.brokerService.setBrokerName(name);
+            if(Files.notExists(dataDirectory)) {
+                Files.createDirectories(dataDirectory);
+            }
             broker.brokerService.setDataDirectoryFile(dataDirectory.toFile());
-            String address = "tcp://" + host + ":" + port;
-            broker.brokerService.addConnector(address);
+            BrokerAddress address = BrokerAddress.vm(host);
+            broker.brokerService.addConnector(address.getUri());
             broker.brokerService.start();
-            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address);
+            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address.getUri());
             broker.initializeConnection(connectionFactory.createConnection());
             broker.start();
             return broker;
@@ -89,7 +95,7 @@ public class ActivemqBroker extends Broker {
     }
 
     @Override
-    public void close() throws MessagingException {
+    public void close() {
         try {
             this.closeConnection();
             this.brokerService.stop();

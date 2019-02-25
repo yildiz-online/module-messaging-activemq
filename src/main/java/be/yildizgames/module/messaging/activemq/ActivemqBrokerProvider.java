@@ -38,14 +38,4 @@ public class ActivemqBrokerProvider implements BrokerProvider {
     public final Broker initialize(final BrokerProperties properties) {
         return ActivemqBroker.initialize(properties);
     }
-
-    @Override
-    public final Broker initialize(final String host, final int port) {
-        return ActivemqBroker.initialize(host, port);
-    }
-
-    @Override
-    public final Broker initializeInternal(final String name, final BrokerProperties properties) {
-        return ActivemqBroker.initializeInternal(name, properties);
-    }
 }
