@@ -54,7 +54,7 @@
     <dependency>
       <groupId>org.apache.activemq</groupId>
       <artifactId>activemq-client</artifactId>
-      <version>5.15.8</version>
+      <version>5.15.9</version>
       <exclusions>
         <exclusion>
           <groupId>org.slf4j</groupId>
@@ -68,29 +68,19 @@
           <groupId>log4j</groupId>
           <artifactId>log4j</artifactId>
         </exclusion>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-databind</artifactId>
-        </exclusion>
       </exclusions>
-    </dependency>
-
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.9.8</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.activemq</groupId>
       <artifactId>activemq-kahadb-store</artifactId>
-      <version>5.15.8</version>
+      <version>5.15.9</version>
     </dependency>
 
     <dependency>
       <groupId>org.apache.activemq</groupId>
       <artifactId>activemq-broker</artifactId>
-      <version>5.15.8</version>
+      <version>5.15.9</version>
       <exclusions>
         <exclusion>
           <groupId>org.slf4j</groupId>
