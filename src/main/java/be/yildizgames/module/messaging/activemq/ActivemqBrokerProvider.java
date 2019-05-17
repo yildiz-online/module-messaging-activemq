@@ -30,6 +30,7 @@ import be.yildizgames.module.messaging.BrokerProvider;
 
 /**
  * Provide the ActiveMQ implementation for the broker.
+ *
  * @author Grégory Van den Borre
  */
 public class ActivemqBrokerProvider implements BrokerProvider {

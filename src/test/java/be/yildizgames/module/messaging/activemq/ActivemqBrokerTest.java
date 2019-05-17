@@ -31,7 +31,6 @@ import be.yildizgames.module.messaging.BrokerMessageDestination;
 import be.yildizgames.module.messaging.BrokerProperties;
 import be.yildizgames.module.messaging.BrokerPropertiesStandard;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
