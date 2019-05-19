@@ -11,7 +11,7 @@ The  activemq messaging module is a set of classes to send and receive message a
 
 ## Requirements
 
-To build this module, you will need a java 9 JDK and Maven 3.
+To build this module, you will need the lates Java JDK and Maven 3.
 
 ## Coding Style and other information
 
