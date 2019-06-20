@@ -95,6 +95,11 @@ public class ActivemqBroker extends Broker {
     }
 
     @Override
+    public void configure(BrokerProperties config) {
+
+    }
+
+    @Override
     public void close() {
         try {
             this.closeConnection();
@@ -103,5 +108,4 @@ public class ActivemqBroker extends Broker {
             throw new MessagingException(e);
         }
     }
-
 }
