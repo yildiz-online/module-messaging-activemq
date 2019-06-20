@@ -52,7 +52,7 @@ public class ActivemqBrokerTest {
             ActivemqBroker broker = ActivemqBroker.initializeInternal("test", brokerProperties);
             BrokerMessageDestination destination = broker.registerQueue("test");
             Wrapper wrapper = new Wrapper();
-            destination.createConsumer(m -> wrapper.setMessage(m));
+            destination.createConsumer(wrapper::setMessage);
             destination.createProducer().sendMessage("test");
             Thread.sleep(1000);
             Assertions.assertNotNull(wrapper.message);
