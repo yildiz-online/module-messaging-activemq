@@ -47,7 +47,7 @@
 
   <properties>
     <java.version>11</java.version>
-    <activemq.version>5.16.2</activemq.version>
+    <activemq.version>5.16.3</activemq.version>
   </properties>
 
   <scm>
