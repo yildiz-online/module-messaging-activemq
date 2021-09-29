@@ -61,7 +61,7 @@ public class ActivemqBroker extends Broker {
         try {
             ActivemqBroker broker = new ActivemqBroker();
             BrokerAddress address = BrokerAddress.failover(List.of(BrokerAddress.tcp(host, port)));
-            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address.getUri());
+            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address.uri());
             broker.initializeConnection(connectionFactory.createConnection());
             broker.start();
             return broker;
@@ -83,9 +83,9 @@ public class ActivemqBroker extends Broker {
             }
             broker.brokerService.setDataDirectoryFile(dataDirectory.toFile());
             BrokerAddress address = BrokerAddress.vm(host);
-            broker.brokerService.addConnector(address.getUri());
+            broker.brokerService.addConnector(address.uri());
             broker.brokerService.start();
-            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address.getUri());
+            ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(address.uri());
             broker.initializeConnection(connectionFactory.createConnection());
             broker.start();
             return broker;

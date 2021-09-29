@@ -56,7 +56,7 @@ public class ActivemqBrokerTest {
             destination.createProducer().sendMessage("test");
             Thread.sleep(1000);
             Assertions.assertNotNull(wrapper.message);
-            Assertions.assertEquals("test", wrapper.message.getText());
+            Assertions.assertEquals("test", wrapper.message.text());
         }
     }
 
