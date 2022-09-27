@@ -36,13 +36,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Properties;
 
-public class ActivemqBrokerTest {
+class ActivemqBrokerTest {
 
     @Nested
-    public class InitializeInternal {
+    class InitializeInternal {
 
         @Test
-        public void happyFlow() throws InterruptedException {
+        void happyFlow() throws InterruptedException {
             Properties properties = new Properties();
             properties.setProperty("broker.host", "localhost");
             properties.setProperty("broker.port", "61616");
